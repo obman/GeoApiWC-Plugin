@@ -1,0 +1,1 @@
+# GeoAPI WooCommerce plugin
