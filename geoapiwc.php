@@ -67,8 +67,8 @@ add_action( 'wp_enqueue_scripts', 'geoapiwc__load_assets__frontend' );
 
 function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
     if (
-        $handle === 'geoapiwc-zipcity'/* ||
-        $handle === 'geoapiwc-address-zip-city'*/
+        $handle === 'geoapiwc-zipcity' ||
+        $handle === 'geoapiwc-address-zip-city'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
