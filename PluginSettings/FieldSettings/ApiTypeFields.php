@@ -4,29 +4,42 @@ namespace PluginSettings\FieldSettings;
 
 class ApiTypeFields implements InterfaceFieldSettings
 {
+    private string $options_name;
+    private string $field_name;
+
+    public function __construct(string $options_name, string $field_name)
+    {
+        $this->options_name  = $options_name;
+        $this->field_name   = $field_name;
+    }
+
     public function setupFields(): void
     {
         add_settings_field(
             'zip-to-city',
-            'API type',
+            'API type: Address to ZIP and City name',
             array($this, 'renderFieldsHTML'),
-            'geoapiwc_settings_fields',
+            MENU_SLUG,
             'api-type-radio-section'
         );
     }
 
     public function renderFieldsHTML(): void
     {
-        $html = '<p>';
-        $html .= '<label for="zip-to-city">ZIP/Postal code to City name</label>';
-        $html .= '<input name="address-to-zip-city" id="address-to-zip-city" type="radio" value="' . get_option('geoapiwc-api-type') . '" />';
-        $html .= '</p>';
+        $options = get_option($this->options_name);
 
-        $html .= '<p>';
-        $html .= '<label for="address-to-zip-city">Address to ZIP and City name</label>';
-        $html .= '<input name="address-to-zip-city" id="address-to-zip-city" type="radio" value="' . get_option('geoapiwc-api-type') . '" />';
-        $html .= '</p>';
+        if (isset($options[$this->field_name])) {
+            if ($options[$this->field_name] === 1 || $options[$this->field_name] === '1') {
+                $_checked = ' checked';
+            }
+            else {
+                $_checked = '';
+            }
+        }
+        else {
+            $_checked = '';
+        }
 
-        echo $html;
+        echo "<input id='{$this->field_name}' name='{$this->options_name}[{$this->field_name}]' type='checkbox' value='1' {$_checked}>";
     }
 }

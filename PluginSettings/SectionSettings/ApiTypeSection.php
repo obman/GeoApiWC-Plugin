@@ -10,7 +10,7 @@ class ApiTypeSection implements InterfaceSectionSettings
             'api-type-radio-section',
             __('Which type of geocoding API', 'geoapiwc'),
             false,
-            'geoapiwc_settings_fields'
+            MENU_SLUG
         );
     }
 }
