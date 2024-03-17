@@ -5,7 +5,6 @@ import {ZipToCity} from "./GeoApiWC/ZipToCity.js";
         document = that.document,
         geoapiwc = that.geoapiwc
     ;
-    console.log (geoapiwc);
 
     that.window.addEventListener('load', () => {
         const zipCity = new ZipToCity(

@@ -54,6 +54,9 @@ function geoapiwc__load_assets__frontend(): void {
             );
 
             if (isset($options['api-type'])) {
+                // code
+            }
+            else {
                 wp_enqueue_script('geoapiwc-zipcity');
                 wp_localize_script('geoapiwc-zipcity', 'geoapiwc', $script_data);
             }
