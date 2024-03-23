@@ -14,9 +14,7 @@ import {AddressToCity} from "./GeoApiWC/AddressToCity.js";
             geoapiwc.postcode_field_id,
             geoapiwc.city_field_id
         );
-
-        console.log (addressCity.getAddressElement());
-
+        
         addressCity.getAddressElement().addEventListener('focusout', () => {
             addressCity.apiCallGeoAddressData();
         });
