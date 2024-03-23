@@ -17,6 +17,7 @@
 use PluginSettings\FieldSettings\ApiTypeFields;
 use PluginSettings\FieldSettings\CityInputIdField;
 use PluginSettings\FieldSettings\CountryInputIdField;
+use PluginSettings\FieldSettings\AddressInputIdField;
 use PluginSettings\FieldSettings\ZipInputIdField;
 use PluginSettings\PluginSettings;
 use PluginSettings\SectionSettings\ApiTypeSection;
@@ -42,6 +43,7 @@ add_action('admin_menu', 'geoapiwc__settings_page');
  */
 function geoapiwc__load_assets__frontend(): void {
     wp_register_script('geoapiwc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapiwc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapiwc-address', GEOAPIWC_DIR . 'assets/js/geoapiwc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 
     $all_plugins = apply_filters('active_plugins', get_option('active_plugins'));
     if (stripos(implode($all_plugins), 'woocommerce.php')) {
@@ -49,12 +51,14 @@ function geoapiwc__load_assets__frontend(): void {
             $options     = get_option(OPTIONS_NAME);
             $script_data = array(
                 'country_field_id'  => $options['country-id-field'],
+                'address_field_id'  => $options['address-id-field'],
                 'postcode_field_id' => $options['zip-id-field'],
                 'city_field_id'     => $options['city-id-field']
             );
 
             if (isset($options['api-type'])) {
-                // code
+                wp_enqueue_script('geoapiwc-address');
+                wp_localize_script('geoapiwc-address', 'geoapiwc', $script_data);
             }
             else {
                 wp_enqueue_script('geoapiwc-zipcity');
@@ -68,7 +72,7 @@ add_action( 'wp_enqueue_scripts', 'geoapiwc__load_assets__frontend' );
 function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
     if (
         $handle === 'geoapiwc-zipcity' ||
-        $handle === 'geoapiwc-address-zip-city'
+        $handle === 'geoapiwc-address'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
@@ -89,6 +93,7 @@ function setup_plugin_settings(): void
 
     $pluginSettings->renderSettingsFields(new ApiTypeFields(OPTIONS_NAME, 'api-type'));
     $pluginSettings->renderSettingsFields(new CountryInputIdField(OPTIONS_NAME, 'country-id-field'));
+    $pluginSettings->renderSettingsFields(new AddressInputIdField(OPTIONS_NAME, 'address-id-field'));
     $pluginSettings->renderSettingsFields(new ZipInputIdField(OPTIONS_NAME, 'zip-id-field'));
     $pluginSettings->renderSettingsFields(new CityInputIdField(OPTIONS_NAME, 'city-id-field'));
 }
