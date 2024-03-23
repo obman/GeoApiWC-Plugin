@@ -21,7 +21,7 @@ export class ZipToCity {
         const
             zipCode     = this.zipElement.value,
             countryCode = this.countryElement.options[this.countryElement.selectedIndex].value,
-            response = await fetch('http://geoapi-zip-city.lan/v1/city-name/' + zipCode + '/' + countryCode)
+            response = await fetch('https://geoapi.sample.si/v1/city-name/' + zipCode + '/' + countryCode)
         ;
 
         if (! response.ok) {
