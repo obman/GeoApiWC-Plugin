@@ -19,7 +19,7 @@ class AddressInputIdField implements InterfaceFieldSettings
             'address-id-field',
             __('ID of Address input field:', 'geoapiwc'),
             array($this, 'renderFieldsHTML'),
-            MENU_SLUG,
+            GEOAPI_MENU_SLUG,
             'event-handler-fields-section'
         );
     }

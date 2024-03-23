@@ -10,7 +10,7 @@ class EventHandlerFieldsSection implements InterfaceSectionSettings
             'event-handler-fields-section',
             __('IDs of checkout fields', 'geoapiwc'),
             array($this, 'additionalSectionInfo'),
-            MENU_SLUG
+            GEOAPI_MENU_SLUG
         );
     }
 

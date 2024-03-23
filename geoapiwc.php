@@ -27,12 +27,12 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 define('GEOAPIWC_DIR', plugin_dir_url( __FILE__ ));
 
-const OPTIONS_NAME = 'geoapiwc_settings_options';
-const MENU_SLUG = 'geoapiwc-plugin';
+const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
+const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
-    add_menu_page('GeoApiWC', 'GeoAPI WC Settings', 'manage_options', MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
+    add_menu_page('GeoApiWC', 'GeoAPI WC Settings', 'manage_options', GEOAPI_MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
 }
 add_action('admin_menu', 'geoapiwc__settings_page');
 
@@ -48,7 +48,7 @@ function geoapiwc__load_assets__frontend(): void {
     $all_plugins = apply_filters('active_plugins', get_option('active_plugins'));
     if (stripos(implode($all_plugins), 'woocommerce.php')) {
         if (is_checkout()) {
-            $options     = get_option(OPTIONS_NAME);
+            $options     = get_option(GEOAPI_OPTIONS_NAME);
             $script_data = array(
                 'country_field_id'  => $options['country-id-field'],
                 'address_field_id'  => $options['address-id-field'],
@@ -85,17 +85,17 @@ require 'PluginSettings/PluginSettings.php';
 
 function setup_plugin_settings(): void
 {
-    register_setting(OPTIONS_NAME, OPTIONS_NAME);
+    register_setting(GEOAPI_OPTIONS_NAME, GEOAPI_OPTIONS_NAME);
 
     $pluginSettings = new PluginSettings();
     $pluginSettings->renderSettingsSection(new ApiTypeSection());
     $pluginSettings->renderSettingsSection(new EventHandlerFieldsSection());
 
-    $pluginSettings->renderSettingsFields(new ApiTypeFields(OPTIONS_NAME, 'api-type'));
-    $pluginSettings->renderSettingsFields(new CountryInputIdField(OPTIONS_NAME, 'country-id-field'));
-    $pluginSettings->renderSettingsFields(new AddressInputIdField(OPTIONS_NAME, 'address-id-field'));
-    $pluginSettings->renderSettingsFields(new ZipInputIdField(OPTIONS_NAME, 'zip-id-field'));
-    $pluginSettings->renderSettingsFields(new CityInputIdField(OPTIONS_NAME, 'city-id-field'));
+    $pluginSettings->renderSettingsFields(new ApiTypeFields(GEOAPI_OPTIONS_NAME, 'api-type'));
+    $pluginSettings->renderSettingsFields(new CountryInputIdField(GEOAPI_OPTIONS_NAME, 'country-id-field'));
+    $pluginSettings->renderSettingsFields(new AddressInputIdField(GEOAPI_OPTIONS_NAME, 'address-id-field'));
+    $pluginSettings->renderSettingsFields(new ZipInputIdField(GEOAPI_OPTIONS_NAME, 'zip-id-field'));
+    $pluginSettings->renderSettingsFields(new CityInputIdField(GEOAPI_OPTIONS_NAME, 'city-id-field'));
 }
 add_action('admin_init', 'setup_plugin_settings');
 
@@ -106,8 +106,8 @@ function geoapiwc__render_options_page_html() {
         <div class="settings-fields-wrapper">
             <form action="options.php" class="form-wrapper" method="post">
                 <?php
-                settings_fields(OPTIONS_NAME);
-                do_settings_sections(MENU_SLUG);
+                settings_fields(GEOAPI_OPTIONS_NAME);
+                do_settings_sections(GEOAPI_MENU_SLUG);
                 submit_button();
                 ?>
             </form>

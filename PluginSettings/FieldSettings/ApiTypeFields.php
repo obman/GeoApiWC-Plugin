@@ -19,7 +19,7 @@ class ApiTypeFields implements InterfaceFieldSettings
             'zip-to-city',
             'API type: Address to ZIP and City name',
             array($this, 'renderFieldsHTML'),
-            MENU_SLUG,
+            GEOAPI_MENU_SLUG,
             'api-type-radio-section'
         );
     }
