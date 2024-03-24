@@ -42,11 +42,14 @@ add_action('admin_menu', 'geoapiwc__settings_page');
  *
  * @return void
  */
-function geoapiwc__load_assets__frontend(): void {
+function geoapi__register_assets__frontend(): void {
     wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
     wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+}
 
+function geoapiwc__load_assets__frontend(): void {
     $all_plugins = apply_filters('active_plugins', get_option('active_plugins'));
+
     if (stripos(implode($all_plugins), 'woocommerce.php')) {
         if (is_checkout()) {
             $options     = get_option(GEOAPI_OPTIONS_NAME);
@@ -70,8 +73,11 @@ function geoapiwc__load_assets__frontend(): void {
                         }
                         break;
                     case 2:
+                        // this API engine has only 1 method available
                         break;
                     case 3:
+                        if (isset($options['api-method'])) {}
+                        else {}
                         break;
                 }
             }
