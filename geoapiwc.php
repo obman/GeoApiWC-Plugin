@@ -14,7 +14,8 @@
  * Text Domain:       geoapiwc
 */
 
-use PluginSettings\FieldSettings\ApiTypeFields;
+use PluginSettings\FieldSettings\ApiMethodField;
+use PluginSettings\FieldSettings\ApiTypeField;
 use PluginSettings\FieldSettings\CityInputIdField;
 use PluginSettings\FieldSettings\CountryInputIdField;
 use PluginSettings\FieldSettings\AddressInputIdField;
@@ -32,7 +33,7 @@ const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
-    add_menu_page('GeoApiWC', 'GeoAPI WC Settings', 'manage_options', GEOAPI_MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
+    add_menu_page('GeoApiType1WC', 'GeoAPI WC Settings', 'manage_options', GEOAPI_MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
 }
 add_action('admin_menu', 'geoapiwc__settings_page');
 
@@ -42,8 +43,8 @@ add_action('admin_menu', 'geoapiwc__settings_page');
  * @return void
  */
 function geoapiwc__load_assets__frontend(): void {
-    wp_register_script('geoapiwc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapiwc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
-    wp_register_script('geoapiwc-address', GEOAPIWC_DIR . 'assets/js/geoapiwc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 
     $all_plugins = apply_filters('active_plugins', get_option('active_plugins'));
     if (stripos(implode($all_plugins), 'woocommerce.php')) {
@@ -57,12 +58,12 @@ function geoapiwc__load_assets__frontend(): void {
             );
 
             if (isset($options['api-type'])) {
-                wp_enqueue_script('geoapiwc-address');
-                wp_localize_script('geoapiwc-address', 'geoapiwc', $script_data);
+                wp_enqueue_script('geoapitype1wc-address');
+                wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
             }
             else {
-                wp_enqueue_script('geoapiwc-zipcity');
-                wp_localize_script('geoapiwc-zipcity', 'geoapiwc', $script_data);
+                wp_enqueue_script('geoapitype1wc-zipcity');
+                wp_localize_script('geoapitype1wc-zipcity', 'geoapiwc', $script_data);
             }
         }
     }
@@ -71,8 +72,8 @@ add_action( 'wp_enqueue_scripts', 'geoapiwc__load_assets__frontend' );
 
 function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
     if (
-        $handle === 'geoapiwc-zipcity' ||
-        $handle === 'geoapiwc-address'
+        $handle === 'geoapitype1wc-zipcity' ||
+        $handle === 'geoapitype1wc-address'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
@@ -91,7 +92,9 @@ function setup_plugin_settings(): void
     $pluginSettings->renderSettingsSection(new ApiTypeSection());
     $pluginSettings->renderSettingsSection(new EventHandlerFieldsSection());
 
-    $pluginSettings->renderSettingsFields(new ApiTypeFields(GEOAPI_OPTIONS_NAME, 'api-type'));
+    $pluginSettings->renderSettingsFields(new ApiTypeField(GEOAPI_OPTIONS_NAME, 'api-type-1', 1));
+
+    $pluginSettings->renderSettingsFields(new ApiMethodField(GEOAPI_OPTIONS_NAME, 'api-method'));
     $pluginSettings->renderSettingsFields(new CountryInputIdField(GEOAPI_OPTIONS_NAME, 'country-id-field'));
     $pluginSettings->renderSettingsFields(new AddressInputIdField(GEOAPI_OPTIONS_NAME, 'address-id-field'));
     $pluginSettings->renderSettingsFields(new ZipInputIdField(GEOAPI_OPTIONS_NAME, 'zip-id-field'));

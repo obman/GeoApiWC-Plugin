@@ -10,7 +10,8 @@ require 'SectionSettings/ApiTypeSection.php';
 require 'SectionSettings/EventHandlerFieldsSection.php';
 
 require 'FieldSettings/InterfaceFieldSettings.php';
-require 'FieldSettings/ApiTypeFields.php';
+require 'FieldSettings/ApiTypeField.php';
+require 'FieldSettings/ApiMethodField.php';
 require 'FieldSettings/CountryInputIdField.php';
 require 'FieldSettings/AddressInputIdField.php';
 require 'FieldSettings/ZipInputIdField.php';
