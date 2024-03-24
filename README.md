@@ -36,31 +36,47 @@ GeoApiWC uses various high-performance geocoding APIs to ensure a smooth and spe
 
 ## Settings
 
-### API Type Settings
+### API Type
 
-Choose which type of API would you like to use.
+Choose the geocoding API that best suits your needs.
+Different APIs offer varying data and accuracy levels.  
+We recommend trying each one to find the optimal fit for your store.
 
-Not all API types return same data
-at same accuracy. Best practice is to play with different types of API and find out for yourself
-which API type best suit your needs.
+*Note: Currently  are 3 types of geocode API available.*
 
-**There are currently 3 types of geocode API available.**
+### API Method
 
-### API Method Settings
+Select the desired geocoding method:
 
-Choose API method type.
+* **Address to ZIP/Postcode and City:** Check this box to automatically fill both city and ZIP/postal code based on the entered address.
+* **ZIP/Postcode to City:** Leave unchecked if you only want to fill the city based on the ZIP/postal code.
 
-If you want to geocode **address** to **ZIP/Postcode and City name** check checkbox field.  
-If you want to geocode **ZIP/Postcode** to **City name**, mark unchecked.
+*Note: Currently only API type 1 offers both options.*
 
-**Currently only API type 1 offers both options.**
+### Fields IDs
 
-### Fields IDs settings
+Enter the IDs of your input fields.
 
-Enter ID of input fields.
+By default, the plugin populates the IDs of the standard WooCommerce checkout form fields.
+If you're using custom checkout elements, enter their respective IDs here.
 
-Right after you install plugin there will be default WooCommerce checkout form ID populated.
-You can use this or if you have custom elements you can enter your values.
+**Here's how to find field IDs:**
+
+1. Access your WordPress dashboard.
+2. Navigate to Appearance > Widgets.
+3. Add the "Custom HTML" widget to a sidebar.
+4. Paste the following code into the widget content area:
+```html
+<script>
+  console.log(document.getElementById('billing_postcode').id);
+  console.log(document.getElementById('billing_city').id);
+</script>
+```
+5. Save the widget.
+6. Visit your checkout page and open your browser's developer console (usually by pressing F12). 
+7. Look for the logged IDs in the console. These are the IDs you need to enter in the plugin settings.
+
+**Remember to remove the "Custom HTML" widget afterward.**
 
 ## License
 
