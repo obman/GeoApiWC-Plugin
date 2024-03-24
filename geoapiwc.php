@@ -45,7 +45,10 @@ add_action('admin_menu', 'geoapiwc__settings_page');
 function geoapi__register_assets__frontend(): void {
     wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
     wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+
+    wp_register_script('geoapitype2wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype2wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 }
+add_action('init', 'geoapi__register_assets__frontend');
 
 function geoapiwc__load_assets__frontend(): void {
     $all_plugins = apply_filters('active_plugins', get_option('active_plugins'));
@@ -62,7 +65,7 @@ function geoapiwc__load_assets__frontend(): void {
 
             if (isset($options['api-type'])) {
                 switch ($options['api-type']) {
-                    case 1:
+                    case '1':
                         if (isset($options['api-method'])) {
                             wp_enqueue_script('geoapitype1wc-address');
                             wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
@@ -72,10 +75,11 @@ function geoapiwc__load_assets__frontend(): void {
                             wp_localize_script('geoapitype1wc-zipcity', 'geoapiwc', $script_data);
                         }
                         break;
-                    case 2:
-                        // this API engine has only 1 method available
+                    case '2':
+                        wp_enqueue_script('geoapitype2wc-address');
+                        wp_localize_script('geoapitype2wc-address', 'geoapiwc', $script_data);
                         break;
-                    case 3:
+                    case '3':
                         if (isset($options['api-method'])) {}
                         else {}
                         break;
@@ -84,12 +88,13 @@ function geoapiwc__load_assets__frontend(): void {
         }
     }
 }
-add_action( 'wp_enqueue_scripts', 'geoapiwc__load_assets__frontend' );
+add_action('wp_enqueue_scripts', 'geoapiwc__load_assets__frontend');
 
 function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
     if (
         $handle === 'geoapitype1wc-zipcity' ||
-        $handle === 'geoapitype1wc-address'
+        $handle === 'geoapitype1wc-address' ||
+        $handle === 'geoapitype2wc-address'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
