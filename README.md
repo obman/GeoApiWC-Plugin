@@ -50,8 +50,8 @@ which API type best suit your needs.
 
 Choose API method type.
 
-If you want to geocode **address** to **ZIP/Postcode** and **City name** check checkbox field.
-If you want to geocode ZIP/Postcode to City name, mark unchecked.
+If you want to geocode **address** to **ZIP/Postcode and City name** check checkbox field.
+If you want to geocode **ZIP/Postcode** to **City name**, mark unchecked.
 
 **Currently only API type 1 offers both options.**
 
