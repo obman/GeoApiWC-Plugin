@@ -1,0 +1,20 @@
+.geoapiwc-parent-wrapper {
+    position: relative;
+}
+
+.geoapiwc-content--api-data--container {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border: 1px solid #333;
+    background-color: #fff;
+}
+
+.geoapiwc-content--api-data--container .single-address {
+    display: block;
+    cursor: pointer;
+}
+
+.geoapiwc-content--api-data--container .single-address:hover {
+    background-color: #ccc;
+}

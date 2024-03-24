@@ -53,6 +53,8 @@ function geoapi__register_assets__frontend(): void {
 
     // Type 3
     wp_register_script('geoapitype3wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype3wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_style('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/css/geoapitype3wc-addresses.css', false, '1.0', 'all');
+    wp_register_script('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/js/geoapitype3wc-addresses.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 }
 add_action('init', 'geoapi__register_assets__frontend');
 
@@ -72,7 +74,7 @@ function geoapiwc__load_assets__frontend(): void {
             if (isset($options['api-type'])) {
                 switch ($options['api-type']) {
                     case '1':
-                        if (isset($options['api-method'])) {
+                        if (isset($options['api-method-address-to-zip-city'])) {
                             wp_enqueue_script('geoapitype1wc-address');
                             wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
                         }
@@ -86,9 +88,16 @@ function geoapiwc__load_assets__frontend(): void {
                         wp_localize_script('geoapitype2wc-address', 'geoapiwc', $script_data);
                         break;
                     case '3':
-                        // TODO: can also be implemented autocomplete or select address
-                        wp_enqueue_script('geoapitype3wc-address');
-                        wp_localize_script('geoapitype3wc-address', 'geoapiwc', $script_data);
+                        if (isset($options['api-method-multiple-addresses-select-option'])) {
+                            // TODO: can also be implemented autocomplete or select address
+                            wp_enqueue_style('geoapitype3wc-addresses');
+                            wp_enqueue_script('geoapitype3wc-addresses');
+                            wp_localize_script('geoapitype3wc-addresses', 'geoapiwc', $script_data);
+                        }
+                        else {
+                            wp_enqueue_script('geoapitype3wc-address');
+                            wp_localize_script('geoapitype3wc-address', 'geoapiwc', $script_data);
+                        }
                         break;
                 }
             }
@@ -102,7 +111,8 @@ function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
         $handle === 'geoapitype1wc-zipcity' ||
         $handle === 'geoapitype1wc-address' ||
         $handle === 'geoapitype2wc-address' ||
-        $handle === 'geoapitype3wc-address'
+        $handle === 'geoapitype3wc-address' ||
+        $handle === 'geoapitype3wc-addresses'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
