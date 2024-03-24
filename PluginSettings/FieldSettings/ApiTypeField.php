@@ -77,7 +77,7 @@ class ApiTypeField implements InterfaceFieldSettings
         else {
             $html .= "<input id='{$this->field_name}-3' name='{$this->options_name}[{$this->field_name}]' type='radio' value='3'>";
         }
-        $html .= "<label for='{$this->field_name}-3'>API type 2</label>";
+        $html .= "<label for='{$this->field_name}-3'>API type 3</label>";
 
         echo $html;
     }
