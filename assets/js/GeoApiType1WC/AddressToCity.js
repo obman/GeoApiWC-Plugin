@@ -1,5 +1,6 @@
 export class AddressToCity {
-    constructor(document, country_target, address_target, zip_target, city_target) {
+    constructor(document, api_url, country_target, address_target, zip_target, city_target) {
+        this.apiUrl         = api_url;
         this.countryElement = document.querySelector(country_target);
         this.addressElement = document.querySelector(address_target);
         this.zipElement     = document.querySelector(zip_target);
@@ -26,7 +27,7 @@ export class AddressToCity {
         const
             countryCode = this.countryElement.options[this.countryElement.selectedIndex].value,
             addressValue = this.addressElement.value,
-            response = await fetch('https://geoapi.sample.si/api-type1/v1/address-data/' + encodeURIComponent(addressValue) + '/' + countryCode)
+            response = await fetch(this.apiUrl + encodeURIComponent(addressValue) + '/' + countryCode)
         ;
 
         if (! response.ok) {
