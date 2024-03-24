@@ -1,4 +1,4 @@
-import {ZipToCity} from "./GeoApiWC/ZipToCity.js";
+import {ZipToCity} from "./GeoApiType1WC/ZipToCity.js";
 
 ((that) => {
     const

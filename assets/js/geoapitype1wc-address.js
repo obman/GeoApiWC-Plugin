@@ -1,4 +1,4 @@
-import {AddressToCity} from "./GeoApiWC/AddressToCity.js";
+import {AddressToCity} from "./GeonamesApiWC/AddressToCity.js";
 
 ((that) => {
     const

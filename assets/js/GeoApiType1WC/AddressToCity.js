@@ -26,7 +26,7 @@ export class AddressToCity {
         const
             countryCode = this.countryElement.options[this.countryElement.selectedIndex].value,
             addressValue = this.addressElement.value,
-            response = await fetch('https://geoapi.sample.si/v1/address-data/' + encodeURIComponent(addressValue) + '/' + countryCode)
+            response = await fetch('https://geoapi.sample.si/api-type1/v1/address-data/' + encodeURIComponent(addressValue) + '/' + countryCode)
         ;
 
         if (! response.ok) {
