@@ -13,20 +13,20 @@ export class AddressSelect extends AddressToCity {
         ;
 
         if (! response.ok) {
+            console.error("API request failed with status:", response.status);
             return false;
         }
 
         const apiData = await response.json();
 
-        // implement better checking ZIP and City separate
         if (! apiData) {
             return false;
         }
 
-        // must create some kind of drop down under the address field
+        // Add new HTML with addresses as list to DOM
+        // after the address input field
         this.#appendSelectAddressHtml(apiData);
 
-        // click event for selection
         // Add click event handlers for single-address elements
         const addressContainer = this.getAddressElement().parentElement.querySelector('.geoapiwc-content--api-data--container');
         addressContainer
@@ -40,6 +40,7 @@ export class AddressSelect extends AddressToCity {
 
     #createAddressContainer(addressFieldHeight) {
         const _addressContainer = document.createElement('span');
+
         _addressContainer.classList.add('geoapiwc-content--api-data--container');
         _addressContainer.style.top = `${addressFieldHeight}px`;
 
@@ -49,7 +50,7 @@ export class AddressSelect extends AddressToCity {
     #createSelectAddressesHtml(apiAddresses) {
         let html = '';
         apiAddresses.forEach((apiAddress) => {
-            html += `<span class="single-address" data-address="${apiAddress.address}" data-zip="${apiAddress.zip}" data-city="${apiAddress.name}">${apiAddress.address}</span>`;
+            html += `<span class="single-address" data-address="${apiAddress.address}" data-street="${apiAddress.street}" data-zip="${apiAddress.zip}" data-city="${apiAddress.name}">${apiAddress.address}</span>`;
         });
 
         return html;
@@ -72,8 +73,6 @@ export class AddressSelect extends AddressToCity {
         const address = selectedAddressElement.dataset.address;
         const zip = selectedAddressElement.dataset.zip;
         const city = selectedAddressElement.dataset.city;
-
-        console.log ('click applied');
 
         //this.addressElement.value = address; // Update address field
         zipElement.value = zip; // Update ZIP field
