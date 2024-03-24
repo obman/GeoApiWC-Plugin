@@ -2,7 +2,7 @@
 
 namespace PluginSettings\FieldSettings;
 
-class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
+class ApiMethodSelectAddressesField implements InterfaceFieldSettings
 {
     private string $options_name;
     private string $field_name;
@@ -16,8 +16,8 @@ class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
     public function setupFields(): void
     {
         add_settings_field(
-            'zip-to-city',
-            'API method: Address to ZIP and City name',
+            'multiple-addresses-select-option',
+            'API method: Select address from multiple address options',
             array($this, 'renderFieldsHTML'),
             GEOAPI_MENU_SLUG,
             'api-type-radio-section'
@@ -41,7 +41,7 @@ class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
         }
 
         $html = "<input id='{$this->field_name}' name='{$this->options_name}[{$this->field_name}]' type='checkbox' value='1' {$_checked}>";
-        $html .= "<small>" . __('(Note: Available only in API type 1)', 'geoapiwc') . "</small>";
+        $html .= "<small>" . __('(Note: Available only in API type 3)', 'geoapiwc') . "</small>";
 
         echo $html;
     }

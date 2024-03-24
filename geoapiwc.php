@@ -15,6 +15,7 @@
 */
 
 use PluginSettings\FieldSettings\ApiMethodAddressToZipCityField;
+use PluginSettings\FieldSettings\ApiMethodSelectAddressesField;
 use PluginSettings\FieldSettings\ApiTypeField;
 use PluginSettings\FieldSettings\CityInputIdField;
 use PluginSettings\FieldSettings\CountryInputIdField;
@@ -122,7 +123,9 @@ function setup_plugin_settings(): void
 
     $pluginSettings->renderSettingsFields(new ApiTypeField(GEOAPI_OPTIONS_NAME, 'api-type'));
 
-    $pluginSettings->renderSettingsFields(new ApiMethodAddressToZipCityField(GEOAPI_OPTIONS_NAME, 'api-method'));
+    $pluginSettings->renderSettingsFields(new ApiMethodAddressToZipCityField(GEOAPI_OPTIONS_NAME, 'api-method-address-to-zip-city'));
+    $pluginSettings->renderSettingsFields(new ApiMethodSelectAddressesField(GEOAPI_OPTIONS_NAME, 'api-method-multiple-addresses-select-option'));
+
     $pluginSettings->renderSettingsFields(new CountryInputIdField(GEOAPI_OPTIONS_NAME, 'country-id-field'));
     $pluginSettings->renderSettingsFields(new AddressInputIdField(GEOAPI_OPTIONS_NAME, 'address-id-field'));
     $pluginSettings->renderSettingsFields(new ZipInputIdField(GEOAPI_OPTIONS_NAME, 'zip-id-field'));

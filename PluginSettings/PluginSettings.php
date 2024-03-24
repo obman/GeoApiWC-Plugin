@@ -12,6 +12,7 @@ require 'SectionSettings/EventHandlerFieldsSection.php';
 require 'FieldSettings/InterfaceFieldSettings.php';
 require 'FieldSettings/ApiTypeField.php';
 require 'FieldSettings/ApiMethodAddressToZipCityField.php';
+require 'FieldSettings/ApiMethodSelectAddressesField.php';
 require 'FieldSettings/CountryInputIdField.php';
 require 'FieldSettings/AddressInputIdField.php';
 require 'FieldSettings/ZipInputIdField.php';
