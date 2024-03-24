@@ -2,7 +2,7 @@
 
 namespace PluginSettings\FieldSettings;
 
-class ApiMethodField implements InterfaceFieldSettings
+class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
 {
     private string $options_name;
     private string $field_name;
