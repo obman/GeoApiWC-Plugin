@@ -33,7 +33,7 @@ const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
-    add_menu_page('GeoApiType1WC', 'GeoAPI WC Settings', 'manage_options', GEOAPI_MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
+    add_menu_page('GeoApiCoreWC', 'GeoAPI WC Settings', 'manage_options', GEOAPI_MENU_SLUG, 'geoapiwc__render_options_page_html', 'dashicons-rest-api');
 }
 add_action('admin_menu', 'geoapiwc__settings_page');
 
@@ -43,10 +43,15 @@ add_action('admin_menu', 'geoapiwc__settings_page');
  * @return void
  */
 function geoapi__register_assets__frontend(): void {
+    // Type 1
     wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
     wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype1wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 
+    // Type 2
     wp_register_script('geoapitype2wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype2wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+
+    // Type 3
+    wp_register_script('geoapitype3wc-address', GEOAPIWC_DIR . 'assets/js/geoapitype3wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
 }
 add_action('init', 'geoapi__register_assets__frontend');
 
@@ -80,8 +85,9 @@ function geoapiwc__load_assets__frontend(): void {
                         wp_localize_script('geoapitype2wc-address', 'geoapiwc', $script_data);
                         break;
                     case '3':
-                        if (isset($options['api-method'])) {}
-                        else {}
+                        // TODO: can also be implemented autocomplete or select address
+                        wp_enqueue_script('geoapitype3wc-address');
+                        wp_localize_script('geoapitype3wc-address', 'geoapiwc', $script_data);
                         break;
                 }
             }
@@ -94,7 +100,8 @@ function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
     if (
         $handle === 'geoapitype1wc-zipcity' ||
         $handle === 'geoapitype1wc-address' ||
-        $handle === 'geoapitype2wc-address'
+        $handle === 'geoapitype2wc-address' ||
+        $handle === 'geoapitype3wc-address'
     ) {
         return '<script src="' . esc_url( $src ) . '" type="module"></script>';
     }
