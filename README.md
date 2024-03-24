@@ -10,7 +10,7 @@
 
 Geocode API plugin for WooCommerce checkout forms
 
-## Description - NEW
+## Description
 
 **Simplify your WooCommerce checkout with automatic location filling!**
 
