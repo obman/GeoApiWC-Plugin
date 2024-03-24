@@ -58,12 +58,22 @@ function geoapiwc__load_assets__frontend(): void {
             );
 
             if (isset($options['api-type'])) {
-                wp_enqueue_script('geoapitype1wc-address');
-                wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
-            }
-            else {
-                wp_enqueue_script('geoapitype1wc-zipcity');
-                wp_localize_script('geoapitype1wc-zipcity', 'geoapiwc', $script_data);
+                switch ($options['api-type']) {
+                    case 1:
+                        if (isset($options['api-method'])) {
+                            wp_enqueue_script('geoapitype1wc-address');
+                            wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
+                        }
+                        else {
+                            wp_enqueue_script('geoapitype1wc-zipcity');
+                            wp_localize_script('geoapitype1wc-zipcity', 'geoapiwc', $script_data);
+                        }
+                        break;
+                    case 2:
+                        break;
+                    case 3:
+                        break;
+                }
             }
         }
     }
@@ -92,7 +102,7 @@ function setup_plugin_settings(): void
     $pluginSettings->renderSettingsSection(new ApiTypeSection());
     $pluginSettings->renderSettingsSection(new EventHandlerFieldsSection());
 
-    $pluginSettings->renderSettingsFields(new ApiTypeField(GEOAPI_OPTIONS_NAME, 'api-type-1', 1));
+    $pluginSettings->renderSettingsFields(new ApiTypeField(GEOAPI_OPTIONS_NAME, 'api-type'));
 
     $pluginSettings->renderSettingsFields(new ApiMethodField(GEOAPI_OPTIONS_NAME, 'api-method'));
     $pluginSettings->renderSettingsFields(new CountryInputIdField(GEOAPI_OPTIONS_NAME, 'country-id-field'));

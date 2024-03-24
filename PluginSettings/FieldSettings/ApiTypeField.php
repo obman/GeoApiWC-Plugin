@@ -6,13 +6,11 @@ class ApiTypeField implements InterfaceFieldSettings
 {
     private string $options_name;
     private string $field_name;
-    private int $number;
 
-    public function __construct(string $options_name, string $field_name, int $number)
+    public function __construct(string $options_name, string $field_name)
     {
         $this->options_name  = $options_name;
         $this->field_name    = $field_name;
-        $this->number        = $number;
     }
 
     public function setupFields(): void
