@@ -32,7 +32,11 @@ export class AddressSelect extends AddressToCity {
 
             apiData = await response.json();
 
-            if (!apiData) {
+            if (! apiData) {
+                return false;
+            }
+
+            if (apiData.error) {
                 throw new Error('Invalid API response');
             }
 
