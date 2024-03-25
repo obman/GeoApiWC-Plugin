@@ -14,7 +14,9 @@ export class AddressSelect extends AddressToCity {
         let apiData  = null;
 
         try {
-            const countryCode  = this.getCountryElement().options[this.getCountryElement().selectedIndex].value;
+            const countryCode  = (this.getCountryElement().options !== undefined) ?
+                this.getCountryElement().options[this.getCountryElement().selectedIndex].value :
+                this.getCountryElement().value;
             const addressValue = this.getAddressElement().value;
 
             Overlay.show(); // Show overlay and loader
