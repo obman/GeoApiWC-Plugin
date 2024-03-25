@@ -44,7 +44,7 @@ We recommend trying each one to find the optimal fit for your store.
 
 *Note: Currently  are 3 types of geocode API available.*
 
-### API Method
+### API Method: Address to ZIP and City name or ZIP to City name
 
 Select the desired geocoding method:
 
@@ -52,6 +52,12 @@ Select the desired geocoding method:
 * **ZIP/Postcode to City:** Leave unchecked if you only want to fill the city based on the ZIP/postal code.
 
 *Note: Currently only API type 1 offers both options.*
+
+### API Method: Get multiple address based on input address
+
+This method will provide multiple address names with uncomplete address input.
+
+*Note: Currently works only with API type 3.*
 
 ### Fields IDs
 
