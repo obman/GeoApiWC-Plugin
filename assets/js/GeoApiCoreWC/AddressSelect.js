@@ -21,6 +21,9 @@ export class AddressSelect extends AddressToCity {
 
             Overlay.show(); // Show overlay and loader
 
+            if (! addressValue) {
+                return false;
+            }
             response = await fetch(this.apiUrl + encodeURIComponent(addressValue) + '/' + countryCode);
 
             if (!response.ok) {
