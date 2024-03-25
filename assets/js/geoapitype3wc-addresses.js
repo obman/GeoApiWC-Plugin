@@ -16,7 +16,7 @@ import {AddressSelect} from "./GeoApiCoreWC/AddressSelect.js";
             geoapiwc.city_field_id
         );
         
-        addressesCity.getAddressElement().addEventListener('focusout', () => {
+        addressesCity.getAddressElement().addEventListener('change', () => {
             addressesCity.apiCallGeoAddressesData();
         });
     });
