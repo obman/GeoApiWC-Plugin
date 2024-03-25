@@ -54,6 +54,6 @@ export class AddressSelectHtmlService {
 
         // Hide the address suggestions container
         addressElement.parentElement.classList.remove('geoapiwc-parent-wrapper'); // Assuming this class hides the container
-        addressContainer.remove(); // remove all addresses from DOM
+        addressContainer.parentNode.remove(); // remove all addresses from DOM
     }
 }

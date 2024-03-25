@@ -39,20 +39,28 @@ export class AddressSelect extends AddressToCity {
             // Add new HTML with addresses as list to DOM
             // after the address input field
             HtmlService.renderAddresses(apiData, this.getAddressElement());
+
+            // Add click event handlers for single-address elements
+            const addressContainer = this.getAddressElement().parentElement.querySelectorAll('.geoapiwc-content--api-data--container');
+            addressContainer.forEach((addressElement, _index, array) => {
+                // find last '.geoapiwc-content--api-data--container'
+                if (_index === array.length - 1) {
+                    addressElement
+                        .querySelectorAll('.single-address')
+                        .forEach((addressElement) => {
+                            addressElement.addEventListener('click', (event) => {
+                                HtmlService.selectAddressHandler(event, this.getAddressElement(), this.getZipElement(), this.getCityElement(), addressElement)
+                            });
+                        });
+                }
+                else {
+                    addressElement.remove();
+                }
+            });
         } catch (error) {
             console.error('Error fetching addresses:', error);
         } finally {
             Overlay.remove(); // Always remove overlay and loader
         }
-
-        // Add click event handlers for single-address elements
-        const addressContainer = this.getAddressElement().parentElement.querySelector('.geoapiwc-content--api-data--container');
-        addressContainer
-            .querySelectorAll('.single-address')
-            .forEach((addressElement) => {
-                addressElement.addEventListener('click', (event) => {
-                    HtmlService.selectAddressHandler(event, this.getAddressElement(), this.getZipElement(), this.getCityElement(), addressContainer)
-                });
-            });
     }
 }
