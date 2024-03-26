@@ -18,15 +18,20 @@ require 'FieldSettings/AddressInputIdField.php';
 require 'FieldSettings/ZipInputIdField.php';
 require 'FieldSettings/CityInputIdField.php';
 
+require 'SectionSettingsFactory.php';
+require 'FieldSettingsFactory.php';
+
 class PluginSettings
 {
-    public function renderSettingsSection(InterfaceSectionSettings $sectionSettings): void
+    public function renderSettingsSection(string $sectionType): void
     {
+        $sectionSettings = SectionSettingsFactory::create($sectionType);
         $sectionSettings->setupSection();
     }
 
-    public function renderSettingsFields(InterfaceFieldSettings $fieldSettings): void
+    public function renderSettingsFields(string $fieldType, string $options_name, string $field_name): void
     {
+        $fieldSettings = FieldSettingsFactory::create($fieldType, $options_name, $field_name);
         $fieldSettings->setupFields();
     }
 }
