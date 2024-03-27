@@ -29,6 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 define('GEOAPIWC_DIR', plugin_dir_url( __FILE__ ));
 
+require __DIR__ . '/vendor/autoload.php';
+
 const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
 const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
@@ -121,8 +123,6 @@ function geoapiwc__load_js_as_ES6($tag, $handle, $src) {
 add_filter('script_loader_tag', 'geoapiwc__load_js_as_ES6', 10, 3);
 
 ## Helper functions
-require 'PluginSettings/PluginSettings.php';
-
 function setup_plugin_settings(): void
 {
     register_setting(GEOAPI_OPTIONS_NAME, GEOAPI_OPTIONS_NAME);
