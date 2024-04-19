@@ -4,7 +4,7 @@ namespace PluginSettings\FieldSettings;
 
 use PluginSettings\FieldSettings\InterfaceFieldSettings;
 
-class ApiBearerTokenField implements InterfaceFieldSettings
+class GetBearerTokenButton implements InterfaceFieldSettings
 {
     private string $options_name;
     private string $field_name;
@@ -18,8 +18,8 @@ class ApiBearerTokenField implements InterfaceFieldSettings
     public function setupFields(): void
     {
         add_settings_field(
-            'api-bearer-token-field',
-            __('Bearer Token:', 'geoapiwc'),
+            'get-bearer-token-button',
+            __('Activate API', 'geoapiwc'),
             array($this, 'renderFieldsHTML'),
             GEOAPI_MENU_SLUG,
             'api-credentials-section'
@@ -30,11 +30,6 @@ class ApiBearerTokenField implements InterfaceFieldSettings
     {
         $options = get_option($this->options_name);
 
-        if (isset($options[$this->field_name])) {
-            echo sprintf('<input id="%1$s" name="%2$s[%1$s]" type="text" value="%3$s">', $this->field_name, $this->options_name, $options[$this->field_name]);
-        }
-        else {
-            echo sprintf('<input id="%1$s" name="%2$s[%1$s]" type="text" value="" readonly>', $this->field_name, $this->options_name);
-        }
+		echo '<button type="button" id="get-bearer-token-button" class="button button-primary">' . __('Activate API', 'geoapiwc') . '</button>';
     }
 }
