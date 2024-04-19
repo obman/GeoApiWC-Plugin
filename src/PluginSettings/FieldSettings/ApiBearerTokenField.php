@@ -31,7 +31,7 @@ class ApiBearerTokenField implements InterfaceFieldSettings
         $options = get_option($this->options_name);
 
         if (isset($options[$this->field_name])) {
-            echo sprintf('<input id="%1$s" name="%2$s[%1$s]" type="text" value="%3$s">', $this->field_name, $this->options_name, $options[$this->field_name]);
+            echo sprintf('<input id="%1$s" name="%2$s[%1$s]" type="text" value="%3$s" readonly>', $this->field_name, $this->options_name, $options[$this->field_name]);
         }
         else {
             echo sprintf('<input id="%1$s" name="%2$s[%1$s]" type="text" value="" readonly>', $this->field_name, $this->options_name);
