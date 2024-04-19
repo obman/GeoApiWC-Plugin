@@ -26,7 +26,6 @@ use function interface_exists;
 use function is_array;
 use function is_object;
 use function md5;
-use function method_exists;
 use function mt_rand;
 use function preg_match;
 use function preg_match_all;
@@ -164,7 +163,7 @@ final class Generator
      * @throws RuntimeException
      * @throws UnknownTypeException
      */
-    public function testDoubleForInterfaceIntersection(array $interfaces, bool $mockObject, bool $callAutoload = true): MockObject|Stub
+    public function testDoubleForInterfaceIntersection(array $interfaces, bool $mockObject, bool $callAutoload = true, bool $returnValueGeneration = true): MockObject|Stub
     {
         if (count($interfaces) < 2) {
             throw new RuntimeException('At least two interfaces must be specified');
@@ -216,7 +215,12 @@ final class Generator
 
         eval($template->render());
 
-        return $this->testDouble($intersectionName, $mockObject, $mockObject);
+        return $this->testDouble(
+            $intersectionName,
+            $mockObject,
+            $mockObject,
+            returnValueGeneration: $returnValueGeneration,
+        );
     }
 
     /**
@@ -641,7 +645,7 @@ final class Generator
                 throw new ClassIsFinalException($_mockClassName['fullClassName']);
             }
 
-            if (method_exists($class, 'isReadOnly') && $class->isReadOnly()) {
+            if ($class->isReadOnly()) {
                 throw new ClassIsReadonlyException($_mockClassName['fullClassName']);
             }
 
