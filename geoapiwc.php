@@ -14,16 +14,7 @@
  * Text Domain:       geoapiwc
 */
 
-use PluginSettings\FieldSettings\ApiMethodAddressToZipCityField;
-use PluginSettings\FieldSettings\ApiMethodSelectAddressesField;
-use PluginSettings\FieldSettings\ApiTypeField;
-use PluginSettings\FieldSettings\CityInputIdField;
-use PluginSettings\FieldSettings\CountryInputIdField;
-use PluginSettings\FieldSettings\AddressInputIdField;
-use PluginSettings\FieldSettings\ZipInputIdField;
 use PluginSettings\PluginSettings;
-use PluginSettings\SectionSettings\ApiTypeSection;
-use PluginSettings\SectionSettings\EventHandlerFieldsSection;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
@@ -128,8 +119,19 @@ function setup_plugin_settings(): void
     register_setting(GEOAPI_OPTIONS_NAME, GEOAPI_OPTIONS_NAME);
 
     $pluginSettings = new PluginSettings();
+
+    $pluginSettings->renderSettingsSection('ApiCredentials');
+    $pluginSettings->renderSettingsSection('LicenseKey');
     $pluginSettings->renderSettingsSection('ApiType');
     $pluginSettings->renderSettingsSection('EventHandlerFields');
+
+	// API Credential
+	$pluginSettings->renderSettingsFields('ApiClientIDField', GEOAPI_OPTIONS_NAME, 'api-client-id-field');
+	$pluginSettings->renderSettingsFields('ApiClientSecretField', GEOAPI_OPTIONS_NAME, 'api-client-secret-field');
+	$pluginSettings->renderSettingsFields('ApiBearerTokenField', GEOAPI_OPTIONS_NAME, 'api-bearer-token-field');
+
+	// License
+	$pluginSettings->renderSettingsFields('LicenseKeyField', GEOAPI_OPTIONS_NAME, 'license-key-field');
 
     $pluginSettings->renderSettingsFields('ApiTypeField', GEOAPI_OPTIONS_NAME, 'api-type');
 
