@@ -129,6 +129,7 @@ function setup_plugin_settings(): void
 	$pluginSettings->renderSettingsFields('ApiClientIDField', GEOAPI_OPTIONS_NAME, 'api-client-id-field');
 	$pluginSettings->renderSettingsFields('ApiClientSecretField', GEOAPI_OPTIONS_NAME, 'api-client-secret-field');
 	$pluginSettings->renderSettingsFields('ApiBearerTokenField', GEOAPI_OPTIONS_NAME, 'api-bearer-token-field');
+	$pluginSettings->renderSettingsFields('GetBearerTokenButton', GEOAPI_OPTIONS_NAME, 'get-bearer-token-button');
 
 	// License
 	$pluginSettings->renderSettingsFields('LicenseKeyField', GEOAPI_OPTIONS_NAME, 'license-key-field');
