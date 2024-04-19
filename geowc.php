@@ -3,7 +3,7 @@
 /*
  * Plugin Name:       GeoAPI WC
  * Plugin URI:        https://github.com/obman/GeoApiWC
- * Description:       Integrate GeoAPI into WooCommerce checkout address fields.
+ * Description:       Integrate GeoWC application APIs into WooCommerce checkout address fields.
  * Author:            obman
  * Version:           1.2.2
  * Requires at least: 6.0
