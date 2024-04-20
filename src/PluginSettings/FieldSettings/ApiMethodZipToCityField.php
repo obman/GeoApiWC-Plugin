@@ -2,7 +2,7 @@
 
 namespace PluginSettings\FieldSettings;
 
-class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
+class ApiMethodZipToCityField implements InterfaceFieldSettings
 {
     private string $options_name;
     private string $field_name;
@@ -17,7 +17,7 @@ class ApiMethodAddressToZipCityField implements InterfaceFieldSettings
     {
         add_settings_field(
             'zip-to-city',
-            'API method: Address to ZIP and City name',
+            'API method: Only ZIP to City name',
             array($this, 'renderFieldsHTML'),
             GEOAPI_MENU_SLUG,
             'api-type-radio-section'

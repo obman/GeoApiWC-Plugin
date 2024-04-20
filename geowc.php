@@ -91,12 +91,12 @@ function geoapiwc__load_assets__frontend(): void {
                 switch ($options['api-type']) {
                     case '1':
                         if (isset($options['api-method-address-to-zip-city'])) {
-                            wp_enqueue_script('geoapitype1wc-address');
-                            wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
-                        }
-                        else {
                             wp_enqueue_script('geoapitype1wc-zipcity');
                             wp_localize_script('geoapitype1wc-zipcity', 'geoapiwc', $script_data);
+                        }
+                        else {
+                            wp_enqueue_script('geoapitype1wc-address');
+                            wp_localize_script('geoapitype1wc-address', 'geoapiwc', $script_data);
                         }
                         break;
                     case '2':

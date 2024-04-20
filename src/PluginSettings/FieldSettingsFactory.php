@@ -7,7 +7,7 @@ use PluginSettings\FieldSettings\AddressInputIdField;
 use PluginSettings\FieldSettings\ApiBearerTokenField;
 use PluginSettings\FieldSettings\ApiClientIdField;
 use PluginSettings\FieldSettings\ApiClientSecretField;
-use PluginSettings\FieldSettings\ApiMethodAddressToZipCityField;
+use PluginSettings\FieldSettings\ApiMethodZipToCityField;
 use PluginSettings\FieldSettings\ApiMethodSelectAddressesField;
 use PluginSettings\FieldSettings\ApiTypeField;
 use PluginSettings\FieldSettings\CityInputIdField;
@@ -28,7 +28,7 @@ class FieldSettingsFactory
 	        'GetBearerTokenButton' => new GetBearerTokenButton($options_name, $field_name),
 	        'LicenseKeyField' => new LicenseKeyField($options_name, $field_name),
             'ApiTypeField' => new ApiTypeField($options_name, $field_name),
-            'ApiMethodAddressToZIPCityField' => new ApiMethodAddressToZipCityField($options_name, $field_name),
+            'ApiMethodAddressToZIPCityField' => new ApiMethodZipToCityField($options_name, $field_name),
             'ApiMethodSelectAddressesField' => new ApiMethodSelectAddressesField($options_name, $field_name),
             'CountryField' => new CountryInputIdField($options_name, $field_name),
             'AddressField' => new AddressInputIdField($options_name, $field_name),
