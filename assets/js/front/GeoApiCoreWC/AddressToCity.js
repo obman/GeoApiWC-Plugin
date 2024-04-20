@@ -46,7 +46,23 @@ export class AddressToCity {
         const
             countryCode = this.countryElement.options[this.countryElement.selectedIndex].value,
             addressValue = this.addressElement.value,
-            response = await fetch(this.apiUrl + encodeURIComponent(addressValue) + '/' + countryCode)
+            response = await fetch(
+                this.getApiUrl(),
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + this.getBearerToken()
+                    },
+                    body: JSON.stringify({
+                        'address': encodeURIComponent(addressValue),
+                        'country': countryCode,
+                        'license': this.getLicense(),
+                        'domain': this.getDomain()
+                    })
+                }
+            )
         ;
 
         if (! response.ok) {

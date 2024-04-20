@@ -9,7 +9,10 @@ import {AddressToCity} from "./GeoApiCoreWC/AddressToCity.js";
     that.window.addEventListener('load', () => {
         const addressCity = new AddressToCity(
             document,
-            'https://geoapi.sample.si/api-type2/v1/address-data/',
+            'http://geoappwc.lan/api/geo/1/v1/type2/address-data',
+            geoapiwc.bearer_token,
+            geoapiwc.license_key,
+            geoapiwc.domain,
             geoapiwc.country_field_id,
             geoapiwc.address_field_id,
             geoapiwc.postcode_field_id,
