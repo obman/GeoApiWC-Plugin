@@ -24,6 +24,7 @@ require __DIR__ . '/vendor/autoload.php';
 
 const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
 const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
+const GEOAPISERVICE_BASE_URL = 'http://geoappwc.lan';
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
@@ -76,7 +77,8 @@ function geoapiwc__load_assets__frontend(): void {
         if (is_checkout()) {
             $options     = get_option(GEOAPI_OPTIONS_NAME);
             $script_data = array(
-                'bearer_token' => $options['api-bearer-token-field'],
+                'base_url'          => GEOAPISERVICE_BASE_URL,
+                'bearer_token'      => $options['api-bearer-token-field'],
                 'license_key'       => $options['license-key-field'],
                 'domain'            => get_site_url(),
                 'country_field_id'  => $options['country-id-field'],

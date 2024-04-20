@@ -11,8 +11,7 @@ import {AddressSelect} from "./GeoApiCoreWC/AddressSelect.js";
     that.window.addEventListener('load', () => {
         const addressesCity = new AddressSelect(
             document,
-            //'https://geoapi.sample.si/api-type3/v1/addresses-data/',
-            'http://geoappwc.lan/api/geo/1/v1/type3/addresses-data',
+            geoapiwc.base_url + '/api/geo/v1/type3/addresses-data',
             geoapiwc.bearer_token,
             geoapiwc.license_key,
             geoapiwc.domain,

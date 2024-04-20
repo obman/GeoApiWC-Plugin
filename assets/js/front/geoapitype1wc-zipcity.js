@@ -9,7 +9,7 @@ import {ZipToCity} from "./GeoApiCoreWC/ZipToCity.js";
     that.window.addEventListener('load', () => {
         const zipCity = new ZipToCity(
             document,
-            'http://geoappwc.lan/api/geo/1/v1/type1/city-name',
+            geoapiwc.base_url + '/api/geo/v1/type1/city-name',
             geoapiwc.bearer_token,
             geoapiwc.license_key,
             geoapiwc.domain,
