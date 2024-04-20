@@ -76,6 +76,9 @@ function geoapiwc__load_assets__frontend(): void {
         if (is_checkout()) {
             $options     = get_option(GEOAPI_OPTIONS_NAME);
             $script_data = array(
+                'bearer_token' => $options['api-bearer-token-field'],
+                'license_key'       => $options['license-key-field'],
+                'domain'            => get_site_url(),
                 'country_field_id'  => $options['country-id-field'],
                 'address_field_id'  => $options['address-id-field'],
                 'postcode_field_id' => $options['zip-id-field'],

@@ -3,8 +3,8 @@ import {ApiOverlay} from "./ApiOverlay.js";
 import {AddressSelectHtmlService} from "./AddressSelectHtmlService.js";
 
 export class AddressSelect extends AddressToCity {
-    constructor(document, api_url, country_target, address_target, zip_target, city_target) {
-        super(document, api_url, country_target, address_target, zip_target, city_target);
+    constructor(document, api_url, bearer_token, license, domain, country_target, address_target, zip_target, city_target,) {
+        super(document, api_url, bearer_token, license, domain, country_target, address_target, zip_target, city_target);
     }
 
     async apiCallGeoAddressesData() {
@@ -24,7 +24,23 @@ export class AddressSelect extends AddressToCity {
             if (! addressValue) {
                 return false;
             }
-            response = await fetch(this.apiUrl + encodeURIComponent(addressValue) + '/' + countryCode);
+            //response = await fetch(this.apiUrl + encodeURIComponent(addressValue) + '/' + countryCode);
+            response = await fetch(
+                this.getApiUrl(),
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + this.getBearerToken()
+                    },
+                    body: JSON.stringify({
+                        'address': encodeURIComponent(addressValue),
+                        'country': countryCode,
+                        'license': this.getLicense(),
+                        'domain': this.getDomain()
+                    })
+                });
 
             if (!response.ok) {
                 throw new Error(`API request failed with status: ${response.status}`);

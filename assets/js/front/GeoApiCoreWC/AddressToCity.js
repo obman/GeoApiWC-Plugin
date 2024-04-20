@@ -1,10 +1,29 @@
 export class AddressToCity {
-    constructor(document, api_url, country_target, address_target, zip_target, city_target) {
+    constructor(document, api_url, bearer_token, license, domain, country_target, address_target, zip_target, city_target) {
         this.apiUrl         = api_url;
+        this.bearerToken    = bearer_token;
+        this.license        = license;
+        this.domain         = domain;
         this.countryElement = document.querySelector(country_target);
         this.addressElement = document.querySelector(address_target);
         this.zipElement     = document.querySelector(zip_target);
         this.cityElement    = document.querySelector(city_target);
+    }
+
+    getApiUrl() {
+        return this.apiUrl;
+    }
+
+    getBearerToken() {
+        return this.bearerToken;
+    }
+
+    getLicense() {
+        return this.license;
+    }
+
+    getDomain() {
+        return this.domain;
     }
 
     getCountryElement() {
