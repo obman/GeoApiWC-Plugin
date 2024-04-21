@@ -1,8 +1,8 @@
 <?php
 
 /*
- * Plugin Name:       GeoAPI WC
- * Plugin URI:        https://github.com/obman/GeoApiWC
+ * Plugin Name:       GeoWC API plugin
+ * Plugin URI:        https://github.com/obman/GeoWC-Plugin
  * Description:       Integrate GeoWC application APIs into WooCommerce checkout address fields.
  * Author:            obman
  * Version:           1.2.2
@@ -30,11 +30,7 @@ require __DIR__ . '/vendor/autoload.php';
 const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
 const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
-const GEOWC_PRODUCTION = IS_GEOWC_PRODUCTION ?? true;
-const GEOWC_PRODUCTION_URL = IS_GEOWC_PRODUCTION_URL ?? 'https://geowc.sample.si';
-const GEOWC_DEVELOPMENT_URL = IS_GEOWC_DEVELOPMENT_URL ?? 'http://geoappwc.lan';
-
-define('GEOAPISERVICE_BASE_URL', GEOWC_PRODUCTION ? GEOWC_PRODUCTION_URL : GEOWC_DEVELOPMENT_URL);
+define('GEOAPISERVICE_BASE_URL', 'https://geowc.sample.si');
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
