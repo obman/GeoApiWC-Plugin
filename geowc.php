@@ -30,7 +30,7 @@ require __DIR__ . '/vendor/autoload.php';
 const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
 const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
 
-define('GEOAPISERVICE_BASE_URL', 'https://geowc.sample.si');
+define('GEOAPISERVICE_BASE_URL', 'https://geoapp.sample.si');
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
