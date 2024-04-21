@@ -5,9 +5,7 @@ import {AddressSelect} from "./GeoApiCoreWC/AddressSelect.js";
         document = that.document,
         geoapiwc = that.geoapiwc
     ;
-
-    console.log (geoapiwc);
-
+    
     that.window.addEventListener('load', () => {
         const addressesCity = new AddressSelect(
             document,
