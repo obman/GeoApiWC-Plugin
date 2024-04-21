@@ -18,7 +18,7 @@
             settingsForm.classList.toggle('disabled');
 
             // do api call to get bearer token
-            fetch('http://geoappwc.lan/oauth/token', {
+            fetch(geoapiwc.base_url + '/oauth/token', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

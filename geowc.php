@@ -18,13 +18,23 @@ use PluginSettings\PluginSettings;
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+if (! function_exists('get_plugin_data')) {
+    require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+}
+
+define('PLUGIN_DATA', get_plugin_data(__FILE__));
 define('GEOAPIWC_DIR', plugin_dir_url( __FILE__ ));
 
 require __DIR__ . '/vendor/autoload.php';
 
 const GEOAPI_OPTIONS_NAME = 'geoapiwc_settings_options';
 const GEOAPI_MENU_SLUG = 'geoapiwc-plugin';
-const GEOAPISERVICE_BASE_URL = 'http://geoappwc.lan';
+
+const GEOWC_PRODUCTION = IS_GEOWC_PRODUCTION ?? true;
+const GEOWC_PRODUCTION_URL = IS_GEOWC_PRODUCTION_URL ?? 'https://geowc.sample.si';
+const GEOWC_DEVELOPMENT_URL = IS_GEOWC_DEVELOPMENT_URL ?? 'http://geoappwc.lan';
+
+define('GEOAPISERVICE_BASE_URL', GEOWC_PRODUCTION ? GEOWC_PRODUCTION_URL : GEOWC_DEVELOPMENT_URL);
 
 // Register plugin hooks
 function geoapiwc__settings_page(): void {
@@ -39,28 +49,29 @@ add_action('admin_menu', 'geoapiwc__settings_page');
  */
 function geoapi__register_assets__frontend(): void {
     // Admin
-	wp_register_style('geoapi-admin-form', GEOAPIWC_DIR . 'assets/css/admin/geoapi-admin-form.css', false, '1.0', 'all');
-    wp_register_script('geoapi-admin-bearer-token', GEOAPIWC_DIR . 'assets/js/admin/geoapp-get-api-bearer-token.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+	wp_register_style('geoapi-admin-form', GEOAPIWC_DIR . 'assets/css/admin/geoapi-admin-form.css', false, PLUGIN_DATA['Version'], 'all');
+    wp_register_script('geoapi-admin-bearer-token', GEOAPIWC_DIR . 'assets/js/admin/geoapp-get-api-bearer-token.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
 
     // Type 1
-    wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/front/geoapitype1wc-zipcity.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
-    wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype1wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype1wc-zipcity', GEOAPIWC_DIR . 'assets/js/front/geoapitype1wc-zipcity.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype1wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype1wc-address.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
 
     // Type 2
-    wp_register_script('geoapitype2wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype2wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype2wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype2wc-address.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
 
     // Type 3
-    wp_register_script('geoapitype3wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype3wc-address.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
-    wp_register_style('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/css/front/geoapitype3wc-addresses.css', false, '1.0', 'all');
-    wp_register_script('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/js/front/geoapitype3wc-addresses.js', false, '1.0', array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_script('geoapitype3wc-address', GEOAPIWC_DIR . 'assets/js/front/geoapitype3wc-address.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
+    wp_register_style('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/css/front/geoapitype3wc-addresses.css', false, PLUGIN_DATA['Version'], 'all');
+    wp_register_script('geoapitype3wc-addresses', GEOAPIWC_DIR . 'assets/js/front/geoapitype3wc-addresses.js', false, PLUGIN_DATA['Version'], array('strategy' => 'defer', 'in_footer' => 'true'));
 }
 add_action('init', 'geoapi__register_assets__frontend');
 
 function geoapi__register_assets__admin(): void {
 	$options     = get_option(GEOAPI_OPTIONS_NAME);
 	$script_data = array(
-		'client_id' => $options['api-client-id-field'],
-		'client_secret' => $options['api-client-secret-field'],
+        'base_url'              => GEOAPISERVICE_BASE_URL,
+		'client_id'             => $options['api-client-id-field'],
+		'client_secret'         => $options['api-client-secret-field'],
         'bearer_token_field_id' => 'api-bearer-token-field',
 	);
 
