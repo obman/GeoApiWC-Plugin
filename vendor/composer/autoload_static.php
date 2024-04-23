@@ -14,7 +14,7 @@ class ComposerStaticInitecf2fa5afa861dd062258e3b06879440
     public static $prefixLengthsPsr4 = array (
         'P' => 
         array (
-            'GeoApiPluginSettings\\' => 15,
+            'PluginSettings\\' => 15,
             'PhpParser\\' => 10,
         ),
         'D' => 
@@ -24,7 +24,7 @@ class ComposerStaticInitecf2fa5afa861dd062258e3b06879440
     );
 
     public static $prefixDirsPsr4 = array (
-        'GeoApiPluginSettings\\' =>
+        'PluginSettings\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/GeoApiPluginSettings',
         ),
